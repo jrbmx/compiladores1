@@ -284,3 +284,25 @@ if (*token == '/' && *(token + 1) == '*') {
         printf("Error: Llave no cerrada.\n");
     }
 }
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Uso: %s archivo\n", argv[0]);
+        return 1;
+    }
+
+    FILE *archivo = fopen(argv[1], "r");
+    if (archivo == NULL) {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+
+    char linea[1000];
+    while (fgets(linea, sizeof(linea), archivo) != NULL) {
+        analizarCodigo(linea);
+    }
+
+    fclose(archivo);
+    
+    return 0;
+}

@@ -150,3 +150,90 @@ if (*token == '/' && *(token + 1) == '*') {
     token += 2;
     continue;
 }
+// Identificar tokens
+        if (isalpha(*token) || *token == '_') {
+            // Identificador o palabra reservada
+            while (*token != '\0' && (isalnum(*token) || *token == '_')) {
+                lexema[i++] = *token;
+                token++;
+            }
+            lexema[i] = '\0';
+            
+            TokenType tipoToken = tipoPalabraReservada(lexema);
+            if (tipoToken != IDENTIFICADOR) {
+                t.tipo = tipoToken;
+                strcpy(t.lexema, lexema);
+            } else {
+                t.tipo = IDENTIFICADOR;
+                strcpy(t.lexema, lexema);
+            }
+        } else if (isdigit(*token) || (*token == '-' && isdigit(*(token + 1)))) {
+            // Número entero o decimal
+            bool decimal = false;
+            bool exponente = false;
+            while (*token != '\0' && (isdigit(*token) || *token == '.' || *token == 'e' || *token == 'E' || (*token == '-' && exponente))) {
+                if (*token == '.') {
+                    decimal = true;
+                }
+                if (*token == 'e' || *token == 'E') {
+                    exponente = true;
+                }
+                lexema[i++] = *token;
+                token++;
+            }
+            lexema[i] = '\0';
+            
+            if (decimal || exponente) {
+                t.tipo = NUMERO_DECIMAL;
+                strcpy(t.lexema, lexema);
+            } else {
+                t.tipo = NUMERO_ENTERO;
+                strcpy(t.lexema, lexema);
+            }
+        } else if (*token == '"' || *token == '\'') {
+            // Cadena
+            char delim = *token;
+            token++; // Saltar el delimitador inicial
+            while (*token != '\0' && *token != delim) {
+                if (*token == '\\') {
+                    // Escapar caracteres
+                    token++;
+                }
+                lexema[i++] = *token;
+                token++;
+            }
+            if (*token == delim) {
+                token++; // Saltar el delimitador final
+                lexema[i] = '\0';
+                t.tipo = CADENA;
+                strcpy(t.lexema, lexema);
+            } else {
+                // Cadena sin cerrar
+                t.tipo = ERROR_CADENA_SIN_CERRAR;
+                strcpy(t.lexema, lexema);
+            }
+        } else {
+            // Símbolo
+            lexema[i++] = *token;
+            token++;
+            lexema[i] = '\0';
+            t.tipo = SIMBOLO;
+            strcpy(t.lexema, lexema);
+            
+            // Verificar paréntesis y llaves
+            if (lexema[0] == '(') {
+                parentesisAbiertos++;
+            } else if (lexema[0] == ')') {
+                parentesisAbiertos--;
+                if (parentesisAbiertos < 0) {
+                    t.tipo = ERROR_PARENTESIS_NO_CERRADO;
+                }
+            } else if (lexema[0] == '{') {
+                llavesAbiertas++;
+            } else if (lexema[0] == '}') {
+                llavesAbiertas--;
+                if (llavesAbiertas < 0) {
+                    t.tipo = ERROR_LLAVE_NO_CERRADA;
+                }
+            }
+        }

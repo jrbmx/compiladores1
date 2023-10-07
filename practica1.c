@@ -3,8 +3,6 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-//primer parcial
-//
 // Enumeración para tipos de token
 typedef enum {
     AND, ELSE, FALSE_TOKEN, FOR, FUN, IF, NULL_TOKEN, OR, PRINT, RETURN, TRUE_TOKEN, VAR, WHILE,

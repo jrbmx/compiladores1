@@ -237,3 +237,50 @@ if (*token == '/' && *(token + 1) == '*') {
                 }
             }
         }
+// Imprimir token y manejar errores
+        //printf("<%s \"%s\" %s>\n", nombreTipoToken(t.tipo), t.lexema, t.literal);
+        printf("<%s \"%s\" %s>\n", nombreTipoToken(t.tipo), t.lexema, (t.tipo == NUMERO_ENTERO || t.tipo == NUMERO_DECIMAL) ? t.lexema : "NULL");
+
+        // Llamar a funciones de manejo de errores específicos
+        if (t.tipo == ERROR_FALTA_PUNTO_Y_COMA) {
+            printf("Error: Falta punto y coma al final de una declaración.\n");
+        }
+        
+        if (t.tipo == ERROR_VARIABLE_DECLARADA) {
+            printf("Error: Variable '%s' ya declarada.\n", t.lexema);
+        }
+        
+        if (t.tipo == ERROR_VARIABLE_NO_DECLARADA) {
+            printf("Error: Uso de variable no declarada '%s'.\n", t.lexema);
+        }
+        
+        if (t.tipo == ERROR_DIVISION_POR_CERO) {
+            printf("Error: División por cero.\n");
+        }
+        
+        if (t.tipo == ERROR_CADENA_SIN_CERRAR) {
+            printf("Error: Cadena no cerrada en '%s'.\n", t.lexema);
+        }
+        
+        if (t.tipo == ERROR_CARACTER_NO_VALIDO) {
+            printf("Error: Caracter no válido en '%s'.\n", t.lexema);
+        }
+    }
+    
+    // Verificar errores
+    if (faltaPuntoYComa) {
+        printf("Error: Falta punto y coma al final de una declaración.\n");
+    }
+    
+    if (parentesisAbiertos > 0) {
+        printf("Error: Falta cerrar %d paréntesis.\n", parentesisAbiertos);
+    } else if (parentesisAbiertos < 0) {
+        printf("Error: Paréntesis no cerrado.\n");
+    }
+    
+    if (llavesAbiertas > 0) {
+        printf("Error: Falta cerrar %d llaves.\n", llavesAbiertas);
+    } else if (llavesAbiertas < 0) {
+        printf("Error: Llave no cerrada.\n");
+    }
+}

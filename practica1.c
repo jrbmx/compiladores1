@@ -99,3 +99,54 @@ void errorCadenaSinCerrar(Token t) {
 void errorCaracterNoValido(Token t) {
     printf("Error: Caracter no válido en '%s'\n", t.lexema);
 }
+// Función principal para analizar el código fuente y generar tokens
+void analizarCodigo(char *codigo) {
+    // Inicializar variables para seguimiento de errores
+    bool faltaPuntoYComa = false;
+    bool declaraciones[100]; // Usamos un arreglo booleano para llevar un registro de declaraciones
+    int parentesisAbiertos = 0;
+    int llavesAbiertas = 0;
+    
+    for (int i = 0; i < 100; i++) {
+        declaraciones[i] = false;
+    }
+    
+    char *token = codigo;
+    
+    while (*token != '\0') {
+        Token t;
+        char lexema[100];
+        char literal[100];
+        int i = 0;
+        
+        // Ignorar espacios en blanco
+while (*token != '\0' && isspace(*token)) {
+    token++;
+}
+
+// Identificar comentarios de una sola línea
+if (*token == '/' && *(token + 1) == '/') {
+    // Saltar hasta el final de la línea
+    while (*token != '\0' && *token != '\n') {
+        token++;
+    }
+    continue;
+}
+
+// Identificar comentarios multilineales
+if (*token == '/' && *(token + 1) == '*') {
+    // Saltar los caracteres '/*'
+    token += 2;
+    // Buscar el cierre de comentario '*/'
+    while (*token != '\0' && !(*token == '*' && *(token + 1) == '/')) {
+        token++;
+    }
+    if (*token == '\0') {
+        // Error: Comentario multilineal sin cerrar
+        printf("Error: Comentario multilineal sin cerrar.\n");
+        break;
+    }
+    // Saltar los caracteres '*/'
+    token += 2;
+    continue;
+}

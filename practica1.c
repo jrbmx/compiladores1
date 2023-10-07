@@ -1,4 +1,5 @@
 //Ramirez Ruiz Alan Edwin
+//Romero Barrientos Jonathan Ruben
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>

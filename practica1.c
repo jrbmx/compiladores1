@@ -48,3 +48,52 @@ const char* nombreTipoToken(TokenType tipo) {
         default: return "DESCONOCIDO";
     }
 }
+// Estructura para tokens
+typedef struct {
+    TokenType tipo;
+    char lexema[100];
+    char literal[100];
+} Token;
+
+// Función para verificar si una cadena es una palabra reservada
+TokenType tipoPalabraReservada(char *cadena) {
+    if (strcmp(cadena, "and") == 0) return AND;
+    if (strcmp(cadena, "else") == 0) return ELSE;
+    if (strcmp(cadena, "false") == 0) return FALSE_TOKEN;
+    if (strcmp(cadena, "for") == 0) return FOR;
+    if (strcmp(cadena, "fun") == 0) return FUN;
+    if (strcmp(cadena, "if") == 0) return IF;
+    if (strcmp(cadena, "null") == 0) return NULL_TOKEN;
+    if (strcmp(cadena, "or") == 0) return OR;
+    if (strcmp(cadena, "print") == 0) return PRINT;
+    if (strcmp(cadena, "return") == 0) return RETURN;
+    if (strcmp(cadena, "true") == 0) return TRUE_TOKEN;
+    if (strcmp(cadena, "var") == 0) return VAR;
+    if (strcmp(cadena, "while") == 0) return WHILE;
+    return IDENTIFICADOR;
+}
+
+// Función para manejar errores de declaración de tipo de variable
+void errorDeclaracionSinTipo(Token t) {
+    printf("Error: Falta tipo en la declaración de variable '%s'\n", t.lexema);
+}
+
+// Función para manejar errores de uso de variables no declaradas
+void errorVariableNoDeclarada(Token t) {
+    printf("Error: Uso de variable no declarada '%s'\n", t.lexema);
+}
+
+// Función para manejar errores de división por cero
+void errorDivisionPorCero() {
+    printf("Error: División por cero\n");
+}
+
+// Función para manejar errores de uso incorrecto de comillas en cadenas
+void errorCadenaSinCerrar(Token t) {
+    printf("Error: Cadena no cerrada en '%s'\n", t.lexema);
+}
+
+// Función para manejar errores de caracteres no válidos
+void errorCaracterNoValido(Token t) {
+    printf("Error: Caracter no válido en '%s'\n", t.lexema);
+}

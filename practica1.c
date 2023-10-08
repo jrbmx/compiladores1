@@ -121,29 +121,30 @@ void errorCaracterNoValido(Token t) {
     printf("Error: Caracter no válido en '%s'\n", t.lexema);
 }
 // Función principal para analizar el código fuente y generar tokens
-void analizarCodigo(char *codigo) {
-    // Inicializar variables para seguimiento de errores
-    bool faltaPuntoYComa = false;
-    bool declaraciones[100]; // Usamos un arreglo booleano para llevar un registro de declaraciones
-    int parentesisAbiertos = 0;
-    int llavesAbiertas = 0;
-    
-    for (int i = 0; i < 100; i++) {
-        declaraciones[i] = false;
+void analizarCodigo(char * codigo) {
+  // Inicializar variables para seguimiento de errores
+  bool faltaPuntoYComa = false;
+  bool declaraciones[100]; // Usamos un arreglo booleano para llevar un registro de declaraciones
+  int parentesisAbiertos = 0;
+  int parentesisCerrados = 0;
+  int llavesAbiertas = 0;
+  int llavesCerradas = 0;
+  for (int i = 0; i < 100; i++) {
+    declaraciones[i] = false;
+  }
+
+  char * token = codigo;
+
+  while ( * token != '\0') {
+    Token t;
+    char lexema[100];
+    char literal[100];
+    int i = 0;
+
+    // Ignorar espacios en blanco y lÃ­neas en blanco
+    while ( * token != '\0' && ( * token == ' ' || * token == '\t' || * token == '\r')) {
+      token++;
     }
-    
-    char *token = codigo;
-    
-    while (*token != '\0') {
-        Token t;
-        char lexema[100];
-        char literal[100];
-        int i = 0;
-        
-        // Ignorar espacios en blanco
-while (*token != '\0' && isspace(*token)) {
-    token++;
-}
 
 // Identificar comentarios de una sola línea
 if (*token == '/' && *(token + 1) == '/') {

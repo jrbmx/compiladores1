@@ -337,23 +337,22 @@ if (*token == '/' && *(token + 1) == '*') {
     token++;
   }
     // Verificar errores
-    if (faltaPuntoYComa) {
-        printf("Error: Falta punto y coma al final de una declaración.\n");
-    }
-    
-    if (parentesisAbiertos > 0) {
-        printf("Error: Falta cerrar %d paréntesis.\n", parentesisAbiertos);
-    } else if (parentesisAbiertos < 0) {
-        printf("Error: Paréntesis no cerrado.\n");
-    }
-    
-    if (llavesAbiertas > 0) {
-        printf("Error: Falta cerrar %d llaves.\n", llavesAbiertas);
-    } else if (llavesAbiertas < 0) {
-        printf("Error: Llave no cerrada.\n");
-    }
-}
+  if (faltaPuntoYComa) {
+    printf("Error: Falta punto y coma al final de una declaraciÃ³n.\n");
+  }
 
+  if (parentesisAbiertos > parentesisCerrados) {
+    printf("Error: Falta cerrar %d parÃ©ntesis.\n", parentesisAbiertos - parentesisCerrados);
+  } else if (parentesisAbiertos < parentesisCerrados) {
+    printf("Error: ParÃ©ntesis no cerrado.\n");
+  }
+
+  if (llavesAbiertas > llavesCerradas) {
+    printf("Error: Falta cerrar %d llaves.\n", llavesAbiertas - llavesCerradas);
+  } else if (llavesAbiertas < llavesCerradas) {
+    printf("Error: Llave no cerrada.\n");
+  }
+}
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         printf("Uso: %s archivo\n", argv[0]);

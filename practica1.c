@@ -236,28 +236,26 @@ if (*token == '/' && *(token + 1) == '*') {
             }
         } else {
             // Símbolo
-            lexema[i++] = *token;
-            token++;
-            lexema[i] = '\0';
-            t.tipo = SIMBOLO;
-            strcpy(t.lexema, lexema);
-            
-            // Verificar paréntesis y llaves
-            if (lexema[0] == '(') {
-                parentesisAbiertos++;
-            } else if (lexema[0] == ')') {
-                parentesisAbiertos--;
-                if (parentesisAbiertos < 0) {
-                    t.tipo = ERROR_PARENTESIS_NO_CERRADO;
-                }
-            } else if (lexema[0] == '{') {
-                llavesAbiertas++;
-            } else if (lexema[0] == '}') {
-                llavesAbiertas--;
-                if (llavesAbiertas < 0) {
-                    t.tipo = ERROR_LLAVE_NO_CERRADA;
-                }
-            }
+           lexema[i++] = * token;
+      lexema[i] = '\0';
+      t.tipo = SIMBOLO;
+      strcpy(t.lexema, lexema);
+
+      // Verificar parÃ©ntesis y llaves
+      if ( * token == '(') {
+        parentesisAbiertos++;
+        t.tipo = PARENTESIS_IZQ;
+      } else if ( * token == ')') {
+        parentesisCerrados++;
+        t.tipo = PARENTESIS_DER;
+      }
+      if ( * token == '{') {
+        llavesAbiertas++;
+        t.tipo = LLAVE_IZQ;
+      } else if ( * token == '}') {
+        llavesCerradas++;
+        t.tipo = LLAVE_DER;
+      }
         }
 // Imprimir token y manejar errores
         //printf("<%s \"%s\" %s>\n", nombreTipoToken(t.tipo), t.lexema, t.literal);

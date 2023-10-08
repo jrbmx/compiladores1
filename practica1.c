@@ -10,8 +10,7 @@
 // Enumeración para tipos de token
 typedef enum {
   AND,ELSE,FALSE_TOKEN,FOR,FUN,IF,NULL_TOKEN,OR,PRINT,RETURN,TRUE_TOKEN,VAR,WHILE,IDENTIFICADOR,NUMERO_ENTERO,NUMERO_DECIMAL,CADENA,SIMBOLO,ERROR_FALTA_PUNTO_Y_COMA,ERROR_VARIABLE_DECLARADA,ERROR_PARENTESIS_NO_CERRADO,ERROR_LLAVE_NO_CERRADA,ERROR_DECLARACION_SIN_TIPO,ERROR_VARIABLE_NO_DECLARADA,ERROR_DIVISION_POR_CERO,ERROR_CADENA_SIN_CERRAR,ERROR_CARACTER_NO_VALIDO,PUNTO_COMA,COMA,PARENTESIS_IZQ,PARENTESIS_DER,LLAVE_IZQ,
-  LLAVE_DER,ASIGNACION,SUMA,RESTA,MULTIPLICACION,DIVISION,MENOR,MAYOR,MENOR_O_IGUAL,MAYOR_O_IGUAL,IGUAL,DIFERENTE,AND_LOGICO,OR_LOGICO,NOT_LOGICO,
-  INCREMENTO,DECREMENTO
+  LLAVE_DER,ASIGNACION,SUMA,RESTA,MULTIPLICACION,DIVISION,MENOR,MAYOR,MENOR_O_IGUAL,MAYOR_O_IGUAL,IGUAL,DIFERENTE,NOT_LOGICO
 }
 TokenType;
 
@@ -62,12 +61,8 @@ const char* nombreTipoToken(TokenType tipo) {
         case MENOR_O_IGUAL:return "MENOR_O_IGUAL";
         case MAYOR_O_IGUAL:return "MAYOR_O_IGUAL";
         case IGUAL:return "IGUAL";
-        case DIFERENTE:return "DIFERENTE";
-        case AND_LOGICO:return "AND_LOGICO";
-        case OR_LOGICO:return "OR_LOGICO";  
+        case DIFERENTE:return "DIFERENTE"; 
         case NOT_LOGICO:return "NOT_LOGICO";
-        case INCREMENTO:return "INCREMENTO";
-        case DECREMENTO:return "DECREMENTO";
         default: return "DESCONOCIDO";
     }
 }
@@ -288,21 +283,10 @@ if (*token == '/' && *(token + 1) == '*') {
         t.tipo = DIFERENTE;
       }
 
-      // Identificar operadores logicos
-      if (strcmp(lexema, "&&") == 0) {
-        t.tipo = AND_LOGICO;
-      } else if (strcmp(lexema, "||") == 0) {
-        t.tipo = OR_LOGICO;
-      } else if (strcmp(lexema, "!") == 0) {
+    if (strcmp(lexema, "!") == 0) {
         t.tipo = NOT_LOGICO;
       }
 
-      // Identificar incremento y decremento
-      if (strcmp(lexema, "++") == 0) {
-        t.tipo = INCREMENTO;
-      } else if (strcmp(lexema, "--") == 0) {
-        t.tipo = DECREMENTO;
-      }
         }
 // Imprimir token y manejar errores
         if (t.tipo != SIMBOLO) { 

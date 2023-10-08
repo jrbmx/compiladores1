@@ -250,7 +250,7 @@ if (*token == '/' && *(token + 1) == '*') {
       } else if ( * token == '}') {
         llavesCerradas++;
         t.tipo = LLAVE_DER;
-      }
+      }
           // Identificar operadores matematicos
       if (strcmp(lexema, "+") == 0) {
         t.tipo = SUMA;
@@ -335,7 +335,7 @@ if (*token == '/' && *(token + 1) == '*') {
     printf("Error: Falta cerrar %d llaves.\n", llavesAbiertas - llavesCerradas);
   } else if (llavesAbiertas < llavesCerradas) {
     printf("Error: Llave no cerrada.\n");
-  }
+  }
 }
 int main(int argc, char *argv[]) {
   if (argc == 2) {

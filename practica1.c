@@ -141,7 +141,7 @@ void analizarCodigo(char * codigo) {
     char literal[100];
     int i = 0;
 
-    // Ignorar espacios en blanco y lÃ­neas en blanco
+    // Ignorar espacios en blanco y li­neas en blanco
     while ( * token != '\0' && ( * token == ' ' || * token == '\t' || * token == '\r')) {
       token++;
     }
@@ -241,7 +241,7 @@ if (*token == '/' && *(token + 1) == '*') {
       t.tipo = SIMBOLO;
       strcpy(t.lexema, lexema);
 
-      // Verificar parÃ©ntesis y llaves
+      // Verificar parentesis y llaves
       if ( * token == '(') {
         parentesisAbiertos++;
         t.tipo = PARENTESIS_IZQ;
@@ -256,7 +256,7 @@ if (*token == '/' && *(token + 1) == '*') {
         llavesCerradas++;
         t.tipo = LLAVE_DER;
       }
-          // Identificar operadores matemÃ¡ticos
+          // Identificar operadores matematicos
       if (strcmp(lexema, "+") == 0) {
         t.tipo = SUMA;
       } else if (strcmp(lexema, "-") == 0) {
@@ -288,7 +288,7 @@ if (*token == '/' && *(token + 1) == '*') {
         t.tipo = DIFERENTE;
       }
 
-      // Identificar operadores lÃ³gicos
+      // Identificar operadores logicos
       if (strcmp(lexema, "&&") == 0) {
         t.tipo = AND_LOGICO;
       } else if (strcmp(lexema, "||") == 0) {
@@ -370,7 +370,7 @@ int main(int argc, char *argv[]) {
     fclose(archivo);
   } else if (argc == 1) {
     // No se proporciona un archivo como argumento, permitir entrada desde la consola
-    // printf("Ingresa el cÃ³digo fuente (Ctrl + C para finalizar):\n");
+    // printf("Ingresa el codigo fuente (Ctrl + C para finalizar):\n");
     char linea[1000];
     while (fgets(linea, sizeof(linea), stdin) != NULL) {
       analizarCodigo(linea);

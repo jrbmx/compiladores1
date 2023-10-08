@@ -305,7 +305,7 @@ if (*token == '/' && *(token + 1) == '*') {
       }
         }
 // Imprimir token y manejar errores
-        //printf("<%s \"%s\" %s>\n", nombreTipoToken(t.tipo), t.lexema, t.literal);
+        if (t.tipo != SIMBOLO) { 
         printf("<%s \"%s\" %s>\n", nombreTipoToken(t.tipo), t.lexema, (t.tipo == NUMERO_ENTERO || t.tipo == NUMERO_DECIMAL) ? t.lexema : "NULL");
 
         // Llamar a funciones de manejo de errores específicos
@@ -333,7 +333,9 @@ if (*token == '/' && *(token + 1) == '*') {
             printf("Error: Caracter no válido en '%s'.\n", t.lexema);
         }
     }
-    
+    // Avanzar al siguiente token
+    token++;
+  }
     // Verificar errores
     if (faltaPuntoYComa) {
         printf("Error: Falta punto y coma al final de una declaración.\n");

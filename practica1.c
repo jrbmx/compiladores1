@@ -46,6 +46,28 @@ const char* nombreTipoToken(TokenType tipo) {
         case ERROR_DIVISION_POR_CERO: return "ERROR_DIVISION_POR_CERO";
         case ERROR_CADENA_SIN_CERRAR: return "ERROR_CADENA_SIN_CERRAR";
         case ERROR_CARACTER_NO_VALIDO: return "ERROR_CARACTER_NO_VALIDO";
+        case PUNTO_COMA:return "PUNTO_COMA";
+        case COMA:return "COMA";
+        case PARENTESIS_IZQ:return "PARENTESIS_IZQ";
+        case PARENTESIS_DER:return "PARENTESIS_DER";
+        case LLAVE_IZQ:return "LLAVE_IZQ";
+        case LLAVE_DER:return "LLAVE_DER";
+        case ASIGNACION:return "ASIGNACION";
+        case SUMA:return "SUMA";
+        case RESTA:return "RESTA";
+        case MULTIPLICACION:return "MULTIPLICACION";
+        case DIVISION:return "DIVISION";
+        case MENOR:return "MENOR";
+        case MAYOR:return "MAYOR";
+        case MENOR_O_IGUAL:return "MENOR_O_IGUAL";
+        case MAYOR_O_IGUAL:return "MAYOR_O_IGUAL";
+        case IGUAL:return "IGUAL";
+        case DIFERENTE:return "DIFERENTE";
+        case AND_LOGICO:return "AND_LOGICO";
+        case OR_LOGICO:return "OR_LOGICO";  
+        case NOT_LOGICO:return "NOT_LOGICO";
+        case INCREMENTO:return "INCREMENTO";
+        case DECREMENTO:return "DECREMENTO";
         default: return "DESCONOCIDO";
     }
 }

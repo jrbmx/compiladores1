@@ -256,6 +256,53 @@ if (*token == '/' && *(token + 1) == '*') {
         llavesCerradas++;
         t.tipo = LLAVE_DER;
       }
+          // Identificar operadores matemÃ¡ticos
+      if (strcmp(lexema, "+") == 0) {
+        t.tipo = SUMA;
+      } else if (strcmp(lexema, "-") == 0) {
+        t.tipo = RESTA;
+      } else if (strcmp(lexema, "*") == 0) {
+        t.tipo = MULTIPLICACION;
+      } else if (strcmp(lexema, "/") == 0) {
+        t.tipo = DIVISION;
+      } else if (strcmp(lexema, "=") == 0) {
+        t.tipo = ASIGNACION;
+      } else if (strcmp(lexema, ";") == 0) {
+        t.tipo = PUNTO_COMA;
+      } else if (strcmp(lexema, ",") == 0) {
+        t.tipo = COMA;
+      }
+
+      // Identificar operadores comparativos
+      if (strcmp(lexema, "<") == 0) {
+        t.tipo = MENOR;
+      } else if (strcmp(lexema, ">") == 0) {
+        t.tipo = MAYOR;
+      } else if (strcmp(lexema, "<=") == 0) {
+        t.tipo = MENOR_O_IGUAL;
+      } else if (strcmp(lexema, ">=") == 0) {
+        t.tipo = MAYOR_O_IGUAL;
+      } else if (strcmp(lexema, "==") == 0) {
+        t.tipo = IGUAL;
+      } else if (strcmp(lexema, "!=") == 0) {
+        t.tipo = DIFERENTE;
+      }
+
+      // Identificar operadores lÃ³gicos
+      if (strcmp(lexema, "&&") == 0) {
+        t.tipo = AND_LOGICO;
+      } else if (strcmp(lexema, "||") == 0) {
+        t.tipo = OR_LOGICO;
+      } else if (strcmp(lexema, "!") == 0) {
+        t.tipo = NOT_LOGICO;
+      }
+
+      // Identificar incremento y decremento
+      if (strcmp(lexema, "++") == 0) {
+        t.tipo = INCREMENTO;
+      } else if (strcmp(lexema, "--") == 0) {
+        t.tipo = DECREMENTO;
+      }
         }
 // Imprimir token y manejar errores
         //printf("<%s \"%s\" %s>\n", nombreTipoToken(t.tipo), t.lexema, t.literal);

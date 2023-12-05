@@ -64,7 +64,11 @@ const char* nombreTipoToken(TokenType tipo) {
         case IGUAL:return "IGUAL";
         case DIFERENTE:return "DIFERENTE"; 
         case NOT_LOGICO:return "NOT_LOGICO";
-        default: return "DESCONOCIDO";
+        default:
+            // Mostrar el lexema del token desconocido
+            printf("DESCONOCIDO: %d\n", tipo);
+            return "DESCONOCIDO";
+    }
     }
 }
 // Estructura para tokens
@@ -162,7 +166,7 @@ if (*token == '/' && *(token + 1) == '*') {
     if (*token == '\0') {
         // Error: Comentario multilineal sin cerrar
         printf("Error: Comentario multilineal sin cerrar.\n");
-        break;
+        break; // Salir del bucle para evitar problemas posteriores
     }
     // Saltar los caracteres '*/'
     token += 2;

@@ -95,7 +95,26 @@ TokenType tipoPalabraReservada(char *cadena) {
     if (strcmp(cadena, "while") == 0) return WHILE;
     return IDENTIFICADOR;
 }
+// Manejo de errores en funciones
+void errorDeclaracionSinTipo(Token t, int numeroLinea) {
+    printf("Error (L%d): Falta tipo en la declaración de variable '%s'\n", numeroLinea, t.lexema);
+}
 
+void errorVariableNoDeclarada(Token t, int numeroLinea) {
+    printf("Error (L%d): Uso de variable no declarada '%s'\n", numeroLinea, t.lexema);
+}
+
+void errorDivisionPorCero(int numeroLinea) {
+    printf("Error (L%d): División por cero\n", numeroLinea);
+}
+
+void errorCadenaSinCerrar(Token t, int numeroLinea) {
+    printf("Error (L%d): Cadena no cerrada en '%s'\n", numeroLinea, t.lexema);
+}
+
+void errorCaracterNoValido(Token t, int numeroLinea) {
+    printf("Error (L%d): Caracter no válido en '%s'\n", numeroLinea, t.lexema);
+}
 // Función para manejar errores de declaración de tipo de variable
 void errorDeclaracionSinTipo(Token t) {
     printf("Error: Falta tipo en la declaración de variable '%s'\n", t.lexema);
@@ -272,7 +291,14 @@ if (*token == '/' && *(token + 1) == '*') {
       } else if (strcmp(lexema, ",") == 0) {
         t.tipo = COMA;
       }
-
+// Operadores lógicos
+if (strcmp(lexema, "&&") == 0) {
+    t.tipo = AND;
+} else if (strcmp(lexema, "||") == 0) {
+    t.tipo = OR;
+} else if (strcmp(lexema, "!") == 0) {
+    t.tipo = NOT_LOGICO;
+}
       // Identificar operadores comparativos
       if (strcmp(lexema, "<") == 0) {
         t.tipo = MENOR;
@@ -321,6 +347,7 @@ if (*token == '/' && *(token + 1) == '*') {
         if (t.tipo == ERROR_CARACTER_NO_VALIDO) {
             printf("Error: Caracter no válido en '%s'.\n", t.lexema);
         }
+          
     }
     // Avanzar al siguiente token
     token++;

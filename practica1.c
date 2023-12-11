@@ -370,31 +370,33 @@ if (strcmp(lexema, "&&") == 0) {
   }
 }
 int main(int argc, char *argv[]) {
-  if (argc == 2) {
-    // Se proporciona un archivo como argumento
-    FILE * archivo = fopen(argv[1], "r");
-    if (archivo == NULL) {
-      perror("Error al abrir el archivo");
-      return 1;
-    }
+    if (argc == 2) {
+        // Se proporciona un archivo como argumento
+        FILE *archivo = fopen(argv[1], "r");
+        if (archivo == NULL) {
+            perror("Error al abrir el archivo");
+            return 1;
+        }
 
-    char linea[1000];
-    while (fgets(linea, sizeof(linea), archivo) != NULL) {
-      analizarCodigo(linea);
-    }
+        char linea[1000];
+        int numeroLinea = 1; // Nuevo contador de línea
+        while (fgets(linea, sizeof(linea), archivo) != NULL) {
+            analizarCodigo(linea, numeroLinea);
+            numeroLinea++;
+        }
 
-    fclose(archivo);
-  } else if (argc == 1) {
+        fclose(archivo);
+    } else if (argc == 1) {
     // No se proporciona un archivo como argumento, permitir entrada desde la consola
     // printf("Ingresa el codigo fuente (Ctrl + C para finalizar):\n");
     char linea[1000];
     while (fgets(linea, sizeof(linea), stdin) != NULL) {
       analizarCodigo(linea);
     }
-  } else {
-    printf("Uso: %s [archivo]\n", argv[0]);
-    return 1;
-  }
-    
+    } else {
+        printf("Uso: %s [archivo]\n", argv[0]);
+        return 1;
+    }
+
     return 0;
 }

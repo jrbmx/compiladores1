@@ -139,9 +139,9 @@ void errorCadenaSinCerrar(Token t) {
 void errorCaracterNoValido(Token t) {
     printf("Error: Caracter no válido en '%s'\n", t.lexema);
 }
-// Función principal para analizar el código fuente y generar tokens
+// Bucle principal para analizar el código fuente y generar tokens
 void analizarCodigo(char * codigo) {
-  // Inicializar variables para seguimiento de errores
+    // Inicializar variables para seguimiento de errores
   bool faltaPuntoYComa = false;
   bool declaraciones[100]; // Usamos un arreglo booleano para llevar un registro de declaraciones
   int parentesisAbiertos = 0;
@@ -151,7 +151,7 @@ void analizarCodigo(char * codigo) {
   for (int i = 0; i < 100; i++) {
     declaraciones[i] = false;
   }
-
+    int numeroLinea = 1;  // Nueva variable para rastrear el número de línea
   char * token = codigo;
 
   while ( * token != '\0') {
